@@ -25,8 +25,9 @@ const questions = [
         name: "usage",
     },
     {
-        type: "input",
-        message: "What is the description of your project?",
+        type: "list",
+        message: "What license, if any, would you like to include in your project?",
+        choices: ["None", "ISC", "MIT", "Do What The F*ck You Want To Public License", "The Unlicense"],
         name: "license",
     },
     {
@@ -59,6 +60,11 @@ function writeToFile(fileName, data) {
 // TODO: Create a function to initialize app
 function init() {
     // run inquirer
+    inquirer
+        .prompt(questions)
+        .then((data) => {
+            console.log(data);
+        })
     // in the then() block, call generateMarkdown
     // once you get the markdown content back, send it to writeToFile()
 }
