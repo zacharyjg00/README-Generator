@@ -19,16 +19,16 @@ function renderLicenseSection(license) {
     return "";
   } else if (license == "ISC") {
     return `
-    This project is created under the ISC license. To read more information on this license, visit https://opensource.org/licenses/ISC.`
+This project is created under the ISC license. To read more information on this license, visit https://opensource.org/licenses/ISC.`
   } else if (license == "MIT") {
     return `
-    This project is created under the MIT license. To read more information on this license, visit https://opensource.org/licenses/MIT.`
+This project is created under the MIT license. To read more information on this license, visit https://opensource.org/licenses/MIT.`
   } else if (license == "Do What The F*ck You Want To Public License") {
     return `
-    This project is created under the Do What The F*ck You Want To Public License. To read more information on this license, visit http://www.wtfpl.net/about/.`
+This project is created under the Do What The F*ck You Want To Public License. To read more information on this license, visit http://www.wtfpl.net/about/.`
   } else if (license == "The Unlicense") {
     return `
-    This project is created under the The Unlicense license. To read more information on this license, visit http://unlicense.org/.`
+This project is created under the The Unlicense license. To read more information on this license, visit http://unlicense.org/.`
   }
 }
 
@@ -50,7 +50,7 @@ function generateMarkdown(data) {
     finalMarkdown += renderLicenseBadge(data.license);
   }
 
-  if(data.description) {
+  if (data.description) {
     finalMarkdown += buildHeader("Description");
     finalMarkdown += `
     ${data.description}
@@ -84,15 +84,15 @@ function generateMarkdown(data) {
   if (data.installation) {
     finalMarkdown += buildHeader("Installation");
     finalMarkdown += `
-    ${data.installation}`
+${data.installation}`
   }
 
   if (data.usage) {
     finalMarkdown += buildHeader("Usage");
     finalMarkdown += `
-    ${data.usage}`
+${data.usage}`
   }
-  
+
   if (data.license != "None") {
     finalMarkdown += buildHeader("License");
     finalMarkdown += renderLicenseSection(data.license);
@@ -101,29 +101,27 @@ function generateMarkdown(data) {
   if (data.contributing) {
     finalMarkdown += buildHeader("Contributing");
     finalMarkdown += `
-    ${data.contributing}`
+${data.contributing}`
   }
 
   if (data.tests) {
     finalMarkdown += buildHeader("Tests");
     finalMarkdown += `
-    ${data.tests}`
+${data.tests}`
   }
 
   if (data.username && data.email) {
     finalMarkdown += buildHeader("Questions");
     finalMarkdown += `
-    If you have any questions about the repo, please open an issue or contact me directly at ${data.email}. You can find more of my work at`
-    finalMarkdown += " [" + data.username + "](https://github.com/" + data.username + "/)."
+If you have any questions about the repo, please open an issue or contact me directly at ${data.email}. You can find more of my work at [${data.username}](https://github.com/${data.username}/).`
   } else if (data.username) {
     finalMarkdown += buildHeader("Questions");
     finalMarkdown += `
-    If you have any questions about the repo, please open an issue. You can find more of my work at` 
-    finalMarkdown += " [" + data.username + "](https://github.com/" + data.username + "/)."
+If you have any questions about the repo, please open an issue. You can find more of my work at [${data.username}](https://github.com/${data.username}/).`
   } else if (data.email) {
     finalMarkdown += buildHeader("Questions");
     finalMarkdown += `
-    If you have any questions about the repo, open an issue or contact me directly at ${data.email}.`
+If you have any questions about the repo, open an issue or contact me directly at ${data.email}.`
   }
 
   return finalMarkdown;
