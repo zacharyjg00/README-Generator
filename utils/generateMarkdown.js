@@ -2,17 +2,13 @@ function renderLicenseBadge(license) {
   if (license == "None") {
     return "";
   } else if (license == "ISC") {
-    return `
-    [![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)`;
+    return " [![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)";
   } else if (license == "MIT") {
-    return `
-    [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)`;
+    return " [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)";
   } else if (license == "Do What The F*ck You Want To Public License") {
-    return `
-    [![License: WTFPL](https://img.shields.io/badge/License-WTFPL-brightgreen.svg)](http://www.wtfpl.net/about/)`;
+    return " [![License: WTFPL](https://img.shields.io/badge/License-WTFPL-brightgreen.svg)](http://www.wtfpl.net/about/)";
   } else if (license == "The Unlicense") {
-    return `
-    [![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](http://unlicense.org/)`;
+    return " [![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](http://unlicense.org/)";
   }
 }
 
@@ -49,24 +45,87 @@ function renderTableOfContentsItem(title) {
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
   let finalMarkdown = `# ${data.title}`;
-  // build badge area
-  // build description header
-  finalMarkdown += buildHeader("Description");
-  // build description content
-  // build table of contents header
+
+  if (data.license != "None") {
+    finalMarkdown += renderLicenseBadge(data.license);
+  }
+
+  if(data.description) {
+    finalMarkdown += buildHeader("Description");
+    finalMarkdown += `
+    ${data.description}
+    `;
+  }
+
   finalMarkdown += buildHeader("Table Of Contents");
-  // for each item the user gave an answer for, create a TOC item
-  if (data.Installation) {
-    renderTableOfContentsItem("Installation")
+  if (data.description) {
+    finalMarkdown += renderTableOfContentsItem("Description");
   }
-  if (data.Usage) {
-    renderTableOfContentsItem("Usage")
+  if (data.installation) {
+    finalMarkdown += renderTableOfContentsItem("Installation");
   }
+  if (data.usage) {
+    finalMarkdown += renderTableOfContentsItem("Usage");
+  }
+  if (data.license != "None") {
+    finalMarkdown += renderTableOfContentsItem("License");
+  }
+  if (data.contributing) {
+    finalMarkdown += renderTableOfContentsItem("Contributing");
+  }
+  if (data.tests) {
+    finalMarkdown += renderTableOfContentsItem("Tests");
+  }
+  if (data.username || data.email) {
+    finalMarkdown += renderTableOfContentsItem("Questions");
+  }
+
   // build each individual section; only for the ones the user gave info for
-  if (data.Installation) {
-    finalMarkdown += `## Installation
-    ${data.Installation}`
+  if (data.installation) {
+    finalMarkdown += buildHeader("Installation");
+    finalMarkdown += `
+    ${data.installation}`
   }
+
+  if (data.usage) {
+    finalMarkdown += buildHeader("Usage");
+    finalMarkdown += `
+    ${data.usage}`
+  }
+  
+  if (data.license != "None") {
+    finalMarkdown += buildHeader("License");
+    finalMarkdown += renderLicenseSection(data.license);
+  }
+
+  if (data.contributing) {
+    finalMarkdown += buildHeader("Contributing");
+    finalMarkdown += `
+    ${data.contributing}`
+  }
+
+  if (data.tests) {
+    finalMarkdown += buildHeader("Tests");
+    finalMarkdown += `
+    ${data.tests}`
+  }
+
+  if (data.username && data.email) {
+    finalMarkdown += buildHeader("Questions");
+    finalMarkdown += `
+    If you have any questions about the repo, please open an issue or contact me directly at ${data.email}. You can find more of my work at`
+    finalMarkdown += " [" + data.username + "](https://github.com/" + data.username + "/)."
+  } else if (data.username) {
+    finalMarkdown += buildHeader("Questions");
+    finalMarkdown += `
+    If you have any questions about the repo, please open an issue. You can find more of my work at` 
+    finalMarkdown += " [" + data.username + "](https://github.com/" + data.username + "/)."
+  } else if (data.email) {
+    finalMarkdown += buildHeader("Questions");
+    finalMarkdown += `
+    If you have any questions about the repo, open an issue or contact me directly at ${data.email}.`
+  }
+
   return finalMarkdown;
 }
 
