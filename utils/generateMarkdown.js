@@ -53,8 +53,7 @@ function generateMarkdown(data) {
   if (data.description) {
     finalMarkdown += buildHeader("Description");
     finalMarkdown += `
-    ${data.description}
-    `;
+${data.description}`;
   }
 
   // This section goes through all of the available options and adds it to the ToC if a response was given
@@ -85,13 +84,13 @@ function generateMarkdown(data) {
   if (data.installation) {
     finalMarkdown += buildHeader("Installation");
     finalMarkdown += `
-${data.installation}`
+${data.installation}`;
   }
 
   if (data.usage) {
     finalMarkdown += buildHeader("Usage");
     finalMarkdown += `
-${data.usage}`
+${data.usage}`;
   }
 
   if (data.license != "None") {
@@ -102,13 +101,13 @@ ${data.usage}`
   if (data.contributing) {
     finalMarkdown += buildHeader("Contributing");
     finalMarkdown += `
-${data.contributing}`
+${data.contributing}`;
   }
 
   if (data.tests) {
     finalMarkdown += buildHeader("Tests");
     finalMarkdown += `
-${data.tests}`
+${data.tests}`;
   }
 
   // Lines 115-127 is for the generation of the Questions section based upon what the user inputted. If they input both a GitHub username and an email, then both are included
