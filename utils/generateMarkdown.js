@@ -1,19 +1,39 @@
-// TODO: Create a function that returns a license badge based on which license is passed in
-// If there is no license, return an empty string
 function renderLicenseBadge(license) {
-
-}
-
-// TODO: Create a function that returns the license link
-// If there is no license, return an empty string
-function renderLicenseLink(license) {
-
+  if (license == "None") {
+    return "";
+  } else if (license == "ISC") {
+    return `
+    [![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)`;
+  } else if (license == "MIT") {
+    return `
+    [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)`;
+  } else if (license == "Do What The F*ck You Want To Public License") {
+    return `
+    [![License: WTFPL](https://img.shields.io/badge/License-WTFPL-brightgreen.svg)](http://www.wtfpl.net/about/)`;
+  } else if (license == "The Unlicense") {
+    return `
+    [![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](http://unlicense.org/)`;
+  }
 }
 
 // TODO: Create a function that returns the license section of README
 // If there is no license, return an empty string
 function renderLicenseSection(license) {
-
+  if (license == "None") {
+    return "";
+  } else if (license == "ISC") {
+    return `
+    This project is created under the ISC license. To read more information on this license, visit https://opensource.org/licenses/ISC.`
+  } else if (license == "MIT") {
+    return `
+    This project is created under the MIT license. To read more information on this license, visit https://opensource.org/licenses/MIT.`
+  } else if (license == "Do What The F*ck You Want To Public License") {
+    return `
+    This project is created under the Do What The F*ck You Want To Public License. To read more information on this license, visit http://www.wtfpl.net/about/.`
+  } else if (license == "The Unlicense") {
+    return `
+    This project is created under the The Unlicense license. To read more information on this license, visit http://unlicense.org/.`
+  }
 }
 
 function buildHeader(text) {
